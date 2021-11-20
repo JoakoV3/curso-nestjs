@@ -6,6 +6,7 @@ import {
   HttpCode,
   HttpStatus,
   Param,
+  ParseIntPipe,
   Post,
   Put,
   Query,
@@ -34,8 +35,8 @@ export class ProductsController {
 
   @Get(':id')
   @HttpCode(HttpStatus.ACCEPTED)
-  getProduct(@Param('id') id: number) {
-    return this.productsService.findOne(+id);
+  getProduct(@Param('id', ParseIntPipe) id: number) {
+    return this.productsService.findOne(id);
   }
 
   @Post()
@@ -44,12 +45,12 @@ export class ProductsController {
   }
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() payload: any) {
-    return this.productsService.update(+id, payload);
+  update(@Param('id', ParseIntPipe) id: number, @Body() payload: any) {
+    return this.productsService.update(id, payload);
   }
 
   @Delete(':id')
-  delete(@Param('id') id: number) {
-    return this.productsService.remove(+id);
+  delete(@Param('id', ParseIntPipe) id: number) {
+    return this.productsService.remove(id);
   }
 }
