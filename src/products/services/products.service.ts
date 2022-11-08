@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 
-import { Product } from 'src/entities/product.entity';
-import { CreateProductDTO, UpdateProductDTO } from 'src/dtos/products.dto';
+import { Product } from '../entities/product.entity';
+import { CreateProductDTO, UpdateProductDTO } from '..//dtos/products.dto';
 
 const initialProducts: Product[] = [
   {
