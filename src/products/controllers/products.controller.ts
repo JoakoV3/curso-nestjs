@@ -5,6 +5,7 @@ import {
   Get,
   HttpCode,
   HttpStatus,
+  Inject,
   Param,
   Post,
   Put,
@@ -14,10 +15,20 @@ import {
 import { ProductsService } from '../services/products.service';
 import { ParseIntPipe } from 'src/common/parse-int.pipe';
 import { CreateProductDTO, UpdateProductDTO } from '../dtos/products.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('products')
 @Controller('products')
 export class ProductsController {
-  constructor(private productsService: ProductsService) {}
+  constructor(
+    private productsService: ProductsService,
+    @Inject('TASKS') private tasks: any[],
+  ) {}
+
+  @Get('tasks')
+  getTasks() {
+    return this.tasks;
+  }
 
   @Get()
   getProducts(
